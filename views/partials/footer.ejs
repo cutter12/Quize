@@ -1,0 +1,119 @@
+    
+</body>
+
+<script>
+    var app = new Vue({
+        el:'#app',
+        data(){
+            return {
+
+            }
+        },
+        methods:{
+            
+        }
+    })
+
+
+
+    var body = new Vue({
+        el:'#body',
+        data:function(){
+            return{
+                second:3600,
+                activeColor:'white',
+                bgColor:'green',
+                width:1800,
+                showTest:false,
+                test_start:new Date(),
+                test_end:new Date(),
+                person_name:'',
+                different_time:'',
+                success:true,
+                danger:false,
+                light:false,
+                disabled_check:true
+            }
+        },
+        
+        
+        methods:{
+            endCount(){
+                var date_end = new Date();
+                this.test_end = date_end
+                var diff = this.test_end - this.test_start
+                var minutes = Math.floor(diff/60000).toFixed(0);
+                var seconds = (diff % 60000 / 1000).toFixed(0);
+                this.different_time = minutes +'.'+seconds;
+                clearTimeout(tm)
+            },
+           
+            countDownTimer(){
+                if(this.second > 0){
+                    var tm = setTimeout(()=>{
+                        
+                        this.second -= 1;
+                        this.countDownTimer();
+                        if(this.second <= 900){
+                            this.success = !this.success;
+                            this.danger = !this.danger;
+                            // this.danger = !this.danger;
+                        }
+                        
+                    },1000);
+                    
+
+                }else{
+                    alert('เวลาหมดแล้ว')
+                    // this.$refs.submitButton.click();
+                   
+                    if(this.$refs.submitButton){
+                        this.$refs.submitButton.click();
+                        clearTimeout(tm)
+                    }
+                    
+                } 
+
+                
+            },
+            startCount(){
+                var date_start = new Date()
+                this.showTest = true;
+                this.test_start = date_start
+                this.countDownTimer();
+                
+            },
+            
+            checkName(){
+                if(this.person_name === ' ' || this.person_name === undefined || this.person_name === ''){
+                    this.disabled_check = true;
+                }else{
+                    this.disabled_check = false;
+                }
+            },
+            preventEnter(){
+                
+            }
+            
+            //Math.floor(diff/60000).toFixed(0)  Minute 
+            //(diff % 60000 / 1000).toFixed(0) Second
+
+           
+        },
+        
+    })
+
+
+    var finish = new Vue({
+        el:'#finish',
+        data:function(){
+            return {
+                test:'Hello'
+            }
+        }
+    })
+
+    
+
+</script>
+</html>

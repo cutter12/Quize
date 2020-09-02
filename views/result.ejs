@@ -1,0 +1,116 @@
+<%- include('partials/header.ejs') %>
+<div class="container">
+    <a href="/" class="btn btn-danger mt-2">กลับหน้าหลัก</a>
+    <% results.forEach(el=>{ %>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                
+                    <h6 class="card-title">ผู้ทดสอบ : <strong><%= el.person_fullname %></strong></h6>
+                <h6>วัน - เวลาที่เริ่มทำแบบทดสอบ :<%= el.test_start %> <br>วัน - เวลาที่สิ้นสุดการทำแบบทดสอบ: <%= el.test_finish %> <br> ระยะเวลารวม: 
+                    <% if(el.test_time === '' || el.test_time === ' ' || el.test_time === undefined){ %>
+                        <span style="color:red;font-weight: bold;">เกินเวลาการทำข้อสอบ</span>
+                    <% } else {%>
+                        <%= el.test_time %> นาที
+                    <% } %>
+                </h6>
+                    
+                    <h6>แบบทดสอบชุดที่ 1 : <strong>ความเป็นเหตุเป็นผลในการมองเห็น</strong>
+                    <br>คะแนน : <%= el.score_vision %> / 5 </h6>
+                    <h6>แบบทดสอบชุดที่ 2 : <strong>สามมิติ</strong>
+                    <br>คะแนน : <%= el.score_3d %> / 5 </h6>
+                    <h6>แบบทดสอบชุดที่ 3 : <strong>ลำดับต่อเนื่อง</strong>
+                    <br>คะแนน : <%= el.score_queue %> / 10 </h6>
+                    <h6>แบบทดสอบชุดที่ 4 : <strong>การวิเคราะห์คำ</strong>
+                    <br>คะแนน : <%= el.score_word %> / 10 </h6>
+                    <h6>แบบทดสอบชุดที่ 5 : <strong>คำนวณตัวเลข</strong>
+                    <br>คะแนน : <%= el.score_math %> / 10 </h6>
+                    <h6>แบบทดสอบชุดที่ 6 : <strong>ภาษาอังฤษ</strong>
+                    <br>คะแนน : <%= el.score_eng %> / 20 </h6>
+                    <% var percentage =  (el.summaryScore * 100) / 60 %>
+                    <h5 class="text-right"><u>รวมคะแนน : <%= el.summaryScore %> / 60 (<%= percentage.toFixed(2) %> %)</u></h5>
+                    <!-- <table class="table">
+                        <thead>
+                            <th>ข้อที่ 1</th>
+                            <th>ข้อที่ 2</th>
+                            <th>ข้อที่ 3</th>
+                            <th>ข้อที่ 4</th>
+                            <th>ข้อที่ 5</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><%= el.test_a1 %></td>
+                                <td><%= el.test_a2 %></td>
+                                <td><%= el.test_a3 %></td>
+                                <td><%= el.test_a4 %></td>
+                                <td><%= el.test_a5 %></td>
+                            </tr>t
+                        </tbody>
+                    </table>
+                    <h6>แบบทดสอบชุดที่ 2 : <strong>แบบทดสอบสามมิติ</strong> </h6>
+                    <table class="table">
+                        <thead>
+                            <th>ข้อ 1</th>
+                            <th>ข้อ 2</th>
+                            <th>ข้อ 3</th>
+                            <th>ข้อ 4</th>
+                            <th>ข้อ 5</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ด้าน A : <%= el.test3d1_A %> <br>ด้าน B : <%= el.test3d1_B %> <br>ด้าน C : <%= el.test3d1_C %></td>
+                                <td>ด้าน A : <%= el.test3d2_A %> <br>ด้าน B : <%= el.test3d2_B %> <br>ด้าน C : <%= el.test3d2_C %></td>
+                                <td>ด้าน A : <%= el.test3d3_A %> <br>ด้าน B : <%= el.test3d3_B %> <br>ด้าน C : <%= el.test3d3_C %></td>
+                                <td>ด้าน A : <%= el.test3d4_A %> <br>ด้าน B : <%= el.test3d4_B %> <br>ด้าน C : <%= el.test3d4_C %></td>
+                                <td>ด้าน A : <%= el.test3d5_A %> <br>ด้าน B : <%= el.test3d5_B %> <br>ด้าน C : <%= el.test3d5_C %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h6>แบบทดสอบชุดที่ 3 : <strong>แบบทดสอบความเป็นเหตุเป็นผลที่เป็นลำดับต่อเนื่อง</strong> </h6>
+                    <table class="table">
+                        <thead>
+                            <th>ข้อ 1</th>
+                            <th>ข้อ 2</th>
+                            <th>ข้อ 3</th>
+                            <th>ข้อ 4</th>
+                            <th>ข้อ 5</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>หมายเลข 1:<%= el.test1queue1 %><br>หมายเลข 2:<%= el.test1queue2 %></td>
+                                <td>หมายเลข 1:<%= el.test2queue1 %><br>หมายเลข 2:<%= el.test2queue2 %></td>
+                                <td>หมายเลข 1:<%= el.test3queue1 %><br>หมายเลข 2:<%= el.test3queue2 %></td>
+                                <td>หมายเลข 1:<%= el.test4queue1 %><br>หมายเลข 2:<%= el.test4queue2 %></td>
+                                <td>หมายเลข 1:<%= el.test5queue1 %><br>หมายเลข 2:<%= el.test5queue2 %></td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <th>ข้อ 6</th>
+                            <th>ข้อ 7</th>
+                            <th>ข้อ 8</th>
+                            <th>ข้อ 9</th>
+                            <th>ข้อ 10</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>หมายเลข 1:<%= el.test6queue1 %><br>หมายเลข 2:<%= el.test6queue2 %></td>
+                                <td>หมายเลข 1:<%= el.test7queue1 %><br>หมายเลข 2:<%= el.test7queue2 %></td>
+                                <td>หมายเลข 1:<%= el.test8queue1 %><br>หมายเลข 2:<%= el.test8queue2 %></td>
+                                <td>หมายเลข 1:<%= el.test9queue1 %><br>หมายเลข 2:<%= el.test9queue2 %></td>
+                                <td>หมายเลข 1:<%= el.test10queue1 %><br>หมายเลข 2:<%= el.test10queue2 %></td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+                </div>
+            </div> <!-- ปิดท้าย card-->
+            <hr>
+
+
+        </div>
+    </div>
+    <% }) %>
+</div>
+
+
+<%- include('partials/footer.ejs') %>

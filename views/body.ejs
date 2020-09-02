@@ -1,0 +1,2804 @@
+<%- include('partials/header.ejs') %>
+
+<div class="container-fluid" id="body">
+  <nav class="navbar fixed-top navbar-light" :class="{'bg-success':success,'bg-danger':danger,'bg-dark':light}" >
+    <a class="navbar-brand text-center" href="#">เวลาทำแบบทดสอบ : {{Math.floor(second/60)}} นาที</a>
+  </nav>
+    <div class="row mt-5">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="display-3 text-center">แบบทดสอบ TFU</div>
+
+            <div class="card">
+              <div class="card-body">
+                <h3>กฏการทำแบบทดสอบ</h3>
+                <p>กรุณากรอกชื่อผู้ทำแบบทดสอบ ผู้สอบมีเวลาในการทำแบบทดสอบ 60 นาที เมื่อหมดเวลาระบบจะส่งข้อสอบโดยอัติโนมัติ โดยจะนับคะแนนเท่าที่ทำได้ 
+                <br><u><i>เมื่อผู้สอบกรอกชื่อและกดปุ่ม "เริ่มทำแบบทดสอบ" ระบบจะแสดงข้อสอบและเวลาจะเริ่มนับถอยหลังทันที</i></u></p>
+                <p>ชื่อผู้ทำแบบทดสอบ <input type="text" name="" class="form-control" id="" v-model="person_name" @focusout="checkName()" ></p>
+                <button type="button" class="btn btn-success" @click="startCount()"  :disabled="disabled_check" >เริ่มทำแบบทดสอบ</button>
+                
+              </div>
+            </div>
+        </div>
+        
+    </div>
+<transition name="fade">
+ <template v-if="showTest">   
+<form action="/send" method="POST" @keydown.enter.prevent.self>
+    <div class="row mt-3">
+        <div class="col-md-12">
+          <input type="hidden" name="test_start" :value="test_start" >
+          <input type="hidden" name="test_end" :value="test_end" >
+          <input type="hidden" name="person_name" :value="person_name">
+          <input type="hidden" name="test_time" :value="different_time">
+            <h4>แบบทดสอบที่ 1 : แบบทดสอบความเป็นเหตุเป็นผลในการมองเห็น</h4>
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h6 class="card-title">ข้อ 1. ข้อใดไม่เข้าพวก</h6>
+                  <img src="/img/1.png" alt="" class="img-fluid" style="height: 150px;"><br>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1" id="inlineRadio1" value="A">
+                    <label class="form-check-label">A</label>
+                  </div>
+                  <div class="form-check form-check-inline"> 
+                    <input class="form-check-input" type="radio" name="ans1" id="inlineRadio2" value="B">
+                    <label class="form-check-label">B</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1" id="inlineRadio3" value="C" >
+                    <label class="form-check-label" >C </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1" id="inlineRadio3" value="D" >
+                    <label class="form-check-label">D </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1" id="inlineRadio3" value="E" >
+                    <label class="form-check-label">E </label>
+                  </div>
+                </div>
+              </div>
+        <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h6 class="card-title">ข้อ 2. ข้อใดไม่เข้าพวก</h6>
+                  <img src="/img/2.png" alt="" class="img-fluid" style="height: 150px;"><br>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2" id="inlineRadio1" value="A">
+                    <label class="form-check-label">A</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2" id="inlineRadio2" value="B">
+                    <label class="form-check-label">B</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2" id="inlineRadio3" value="C" >
+                    <label class="form-check-label">C </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2" id="inlineRadio3" value="D" >
+                    <label class="form-check-label">D </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2" id="inlineRadio3" value="E" >
+                    <label class="form-check-label" >E </label>
+                  </div>
+                </div>
+              </div>
+        <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h6 class="card-title">ข้อ 3. ข้อใดไม่เข้าพวก</h6>
+                  <img src="/img/3.png" alt="" class="img-fluid" style="height: 150px;"><br>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3" id="inlineRadio1" value="A">
+                    <label class="form-check-label" >A</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3" id="inlineRadio2" value="B">
+                    <label class="form-check-label" >B</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3" id="inlineRadio3" value="C" >
+                    <label class="form-check-label" >C </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3" id="inlineRadio3" value="D" >
+                    <label class="form-check-label" >D </label>
+                  </div>
+                </div>
+              </div>
+        <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h6 class="card-title">ข้อ 4. ข้อใดไม่เข้าพวก</h6>
+                  <img src="/img/4.png" alt="" class="img-fluid" style="height: 150px;"><br>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4" id="inlineRadio1" value="A">
+                    <label class="form-check-label" >A</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4" id="inlineRadio2" value="B">
+                    <label class="form-check-label" >B</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4" id="inlineRadio3" value="C" >
+                    <label class="form-check-label" >C </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4" id="inlineRadio3" value="D" >
+                    <label class="form-check-label" >D </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4" id="inlineRadio3" value="E" >
+                    <label class="form-check-label" >E </label>
+                  </div>
+                </div>
+              </div>
+        <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h6 class="card-title">ข้อ 5. ข้อใดไม่เข้าพวก</h6>
+                  <img src="/img/5.png" alt="" class="img-fluid" style="height: 150px;"><br>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5" id="inlineRadio1" value="A">
+                    <label class="form-check-label"  >A</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5" id="inlineRadio2" value="B">
+                    <label class="form-check-label"  >B</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5" id="inlineRadio3" value="C" >
+                    <label class="form-check-label"  >C </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5" id="inlineRadio3" value="D" >
+                    <label class="form-check-label"  >D </label>
+                  </div>
+                </div>
+              </div>
+        <hr>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <h4>แบบทดสอบที่ 2 : แบบทดสอบ 3 มิติ</h4>
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h6 class="card-title">ข้อ 1. </h6>
+                  <img src="/img/2-1.png" alt="" class="img-fluid" style="height: 500px;"><br>
+                  <span>ด้าน A: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_1" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_1" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_1" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_1" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_1" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div><br>
+                  <span>ด้าน B: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_2" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_2" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_2" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_2" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_2" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div><br>
+                  <span>ด้าน C: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_3" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_3" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_3" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_3" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans1_3" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div>
+                </div>
+              </div>
+        <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h6 class="card-title">ข้อ 2.</h6>
+                  <img src="/img/2-2.png" alt="" class="img-fluid" style="height: 500px;"><br>
+                  <span>ด้าน A: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_1" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_1" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_1" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_1" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_1" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div><br>
+                  <span>ด้าน B: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_2" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_2" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_2" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_2" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_2" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div><br>
+                  <span>ด้าน C: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_3" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_3" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_3" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_3" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans2_3" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div>
+                </div>
+              </div>
+        <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h6 class="card-title">ข้อ 3. </h6>
+                  <img src="/img/2-3.png" alt="" class="img-fluid" style="height: 500px;"><br>
+                  <span>ด้าน A: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_1" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_1" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_1" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_1" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_1" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div><br>
+                  <span>ด้าน B: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_2" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_2" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_2" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_2" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_2" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div><br>
+                  <span>ด้าน C: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_3" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_3" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_3" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_3" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans3_3" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div>
+                </div>
+              </div>
+        <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h6 class="card-title">ข้อ 4. </h6>
+                  <img src="/img/2-4.png" alt="" class="img-fluid" style="height: 500px;"><br>
+                  
+                  <span>ด้าน A: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_1" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_1" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_1" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_1" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_1" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div><br>
+                  <span>ด้าน B: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_2" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_2" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_2" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_2" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_2" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div><br>
+                  <span>ด้าน C: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_3" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_3" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_3" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_3" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans4_3" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div>
+                </div>
+              </div>
+        <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h6 class="card-title">ข้อ 5. </h6>
+                  <img src="/img/2-5.png" alt="" class="img-fluid" style="height: 500px;"><br>
+                  <span>ด้าน A: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_1" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_1" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_1" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_1" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_1" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div>
+                  <br>
+                  <span>ด้าน B: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_2" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_2" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_2" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_2" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_2" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div>
+                  <br>
+
+                  <span>ด้าน C: </span>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_3" id="inlineRadio1" value="i">
+                    <label class="form-check-label"  >i</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_3" id="inlineRadio2" value="ii">
+                    <label class="form-check-label"  >ii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_3" id="inlineRadio3" value="iii" >
+                    <label class="form-check-label"  >iii</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_3" id="inlineRadio3" value="iv" >
+                    <label class="form-check-label"  >iv</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ans5_3" id="inlineRadio3" value="v" >
+                    <label class="form-check-label"  >v</label>
+                  </div>
+                </div>
+              </div>
+        <hr>
+
+
+        </div>
+    </div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h4>แบบทดสอบที่ 3 : แบบทดสอบความเป็นเหตุเป็นผลที่เป็นลำดับต่อเนื่อง</h4>
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">ข้อ 1.</h6>
+        <img src="/img/3_1.png" alt="" class="img-fluid" ><br>
+        <span>1 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test1queue1" id="inlineRadio1" value="A">
+          <label class="form-check-label" >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test1queue1" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test1queue1" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test1queue1" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test1queue1" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test1queue1" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <br>
+        <span>2 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test1queue2" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test1queue2" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test1queue2" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test1queue2" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test1queue2" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test1queue2" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">ข้อ 2.</h6>
+        <img src="/img/3_2.png" alt="" class="img-fluid" ><br>
+        <span>1 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test2queue1" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test2queue1" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test2queue1" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test2queue1" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test2queue1" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test2queue1" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <br>
+        <span>2 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test2queue2" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test2queue2" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test2queue2" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test2queue2" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test2queue2" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test2queue2" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">ข้อ 3.</h6>
+        <img src="/img/3_3.png" alt="" class="img-fluid" ><br>
+        <span>1 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test3queue1" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test3queue1" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test3queue1" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test3queue1" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test3queue1" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test3queue1" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <br>
+        <span>2 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test3queue2" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test3queue2" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test3queue2" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test3queue2" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test3queue2" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test3queue2" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">ข้อ 4.</h6>
+        <img src="/img/3_4.png" alt="" class="img-fluid" ><br>
+        <span>1 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test4queue1" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test4queue1" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test4queue1" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test4queue1" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test4queue1" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test4queue1" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <br>
+        <span>2 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test4queue2" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test4queue2" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test4queue2" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test4queue2" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test4queue2" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test4queue2" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">ข้อ 5.</h6>
+        <img src="/img/3_5.png" alt="" class="img-fluid" ><br>
+        <span>1 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test5queue1" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test5queue1" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test5queue1" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test5queue1" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test5queue1" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test5queue1" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <br>
+        <span>2 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test5queue2" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test5queue2" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test5queue2" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test5queue2" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test5queue2" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test5queue2" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">ข้อ 6.</h6>
+        <img src="/img/3_6.png" alt="" class="img-fluid" ><br>
+        <span>1 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue1" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue1" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue1" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue1" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue1" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue1" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue1" id="inlineRadio3" value="G" >
+          <label class="form-check-label"  >G </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue1" id="inlineRadio3" value="H" >
+          <label class="form-check-label"  >H </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue1" id="inlineRadio3" value="I" >
+          <label class="form-check-label"  >I </label>
+        </div>
+        <br>
+        <span>2 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue2" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue2" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue2" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue2" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue2" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue2" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue2" id="inlineRadio3" value="G" >
+          <label class="form-check-label"  >G </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue2" id="inlineRadio3" value="H" >
+          <label class="form-check-label"  >H </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test6queue2" id="inlineRadio3" value="I" >
+          <label class="form-check-label"  >I </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">ข้อ 7.</h6>
+        <img src="/img/3_7.png" alt="" class="img-fluid" ><br>
+        <span>1 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue1" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue1" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue1" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue1" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue1" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue1" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue1" id="inlineRadio3" value="G" >
+          <label class="form-check-label"  >G </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue1" id="inlineRadio3" value="H" >
+          <label class="form-check-label"  >H </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue1" id="inlineRadio3" value="I" >
+          <label class="form-check-label"  >I </label>
+        </div>
+        <br>
+        <span>2 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue2" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue2" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue2" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue2" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue2" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue2" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue2" id="inlineRadio3" value="G" >
+          <label class="form-check-label"  >G </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue2" id="inlineRadio3" value="H" >
+          <label class="form-check-label"  >H </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test7queue2" id="inlineRadio3" value="I" >
+          <label class="form-check-label"  >I </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">ข้อ 8.</h6>
+        <img src="/img/3_8.png" alt="" class="img-fluid" ><br>
+        <span>1 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue1" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue1" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue1" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue1" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue1" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue1" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue1" id="inlineRadio3" value="G" >
+          <label class="form-check-label"  >G </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue1" id="inlineRadio3" value="H" >
+          <label class="form-check-label"  >H </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue1" id="inlineRadio3" value="I" >
+          <label class="form-check-label"  >I </label>
+        </div>
+        <br>
+        <span>2 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue2" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue2" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue2" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue2" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue2" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue2" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue2" id="inlineRadio3" value="G" >
+          <label class="form-check-label"  >G </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue2" id="inlineRadio3" value="H" >
+          <label class="form-check-label"  >H </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test8queue2" id="inlineRadio3" value="I" >
+          <label class="form-check-label"  >I </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">ข้อ 9.</h6>
+        <img src="/img/3_9.png" alt="" class="img-fluid" ><br>
+        <span>1 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue1" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue1" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue1" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue1" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue1" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue1" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue1" id="inlineRadio3" value="G" >
+          <label class="form-check-label"  >G </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue1" id="inlineRadio3" value="H" >
+          <label class="form-check-label"  >H </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue1" id="inlineRadio3" value="I" >
+          <label class="form-check-label"  >I </label>
+        </div>
+        <br>
+        <span>2 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue2" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue2" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue2" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue2" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue2" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue2" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue2" id="inlineRadio3" value="G" >
+          <label class="form-check-label"  >G </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue2" id="inlineRadio3" value="H" >
+          <label class="form-check-label"  >H </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test9queue2" id="inlineRadio3" value="I" >
+          <label class="form-check-label"  >I </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">ข้อ 10.</h6>
+        <img src="/img/3_10.png" alt="" class="img-fluid" ><br>
+        <span>1 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue1" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue1" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue1" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue1" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue1" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue1" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue1" id="inlineRadio3" value="G" >
+          <label class="form-check-label"  >G </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue1" id="inlineRadio3" value="H" >
+          <label class="form-check-label"  >H </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue1" id="inlineRadio3" value="I" >
+          <label class="form-check-label"  >I </label>
+        </div>
+        <br>
+        <span>2 = </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue2" id="inlineRadio1" value="A">
+          <label class="form-check-label"  >A</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue2" id="inlineRadio2" value="B">
+          <label class="form-check-label"  >B</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue2" id="inlineRadio3" value="C" >
+          <label class="form-check-label"  >C </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue2" id="inlineRadio3" value="D" >
+          <label class="form-check-label"  >D </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue2" id="inlineRadio3" value="E" >
+          <label class="form-check-label"  >E </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue2" id="inlineRadio3" value="F" >
+          <label class="form-check-label"  >F </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue2" id="inlineRadio3" value="G" >
+          <label class="form-check-label"  >G </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue2" id="inlineRadio3" value="H" >
+          <label class="form-check-label"  >H </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="test10queue2" id="inlineRadio3" value="I" >
+          <label class="form-check-label"  >I </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="row">
+  <div class="col-md-12">
+    <h4>แบบทดสอบที่ 4 : แบบทดสอบการวิเคราะห์เรื่องคำ</h4>
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">แบบทดสอบการวิเคราะห์เรื่องคำ</div>
+        <strong>ตัวอย่าง</strong>
+        <p>เมืองนิวแลนด์อยู่ทางตะวันตกมากกว่าเมืองเพิร์ธ 				
+          แต่ไม่ได้อยู่ไกลไปทางตะวันตกมากกว่าเมืองฟรินซ์<br>
+          <u>คำถาม</u>:เมืองไหนที่อยู่ทางตะวันออกมากที่สุด			
+        </p>
+        <span>A. นิวแลนด์ &nbsp&nbsp B.ฟรินซ์ &nbsp&nbsp C.เพิร์ธ</span>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">1. นิดาอาศัยอยู่บนภูเขาไกลออกไปกว่าเจนจิต มะลิอาศัยอยู่บนภูเขาไกลออกไปกว่านิดา<br>
+          คำถาม :	ใครอาศัยอยู่บนภูเขาที่ไกลขึ้นไปที่สุด						
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword1" id="" value="A">
+            <label class="form-check-label"  >&nbspA.นิดา</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword1" id="" value="B">
+            <label class="form-check-label"  >&nbspB. เจนจิต</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword1" id="" value="C">
+            <label class="form-check-label"  >&nbspC. มะลิ</label>
+          </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">2.ผู้หญิงทุกคนชอบเล่นกีฬา นีน่าและโจโจ้ชอบเล่นเทนนิส ขณะที่แซมมี่และแอนน์							
+          ชอบวิ่งแข่ง ทั้งนีน่าและแอนน์ชอบว่ายน้ำ<br>
+          คำถาม :	ใครชอบเทนนิสและว่ายน้ำ						
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword2" id="" value="A">
+            <label class="form-check-label"  >&nbspA. นีน่า</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword2" id="" value="B">
+            <label class="form-check-label"  >&nbspB. โจโจ้</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword2" id="" value="C">
+            <label class="form-check-label"  >&nbspC. แซมมี่</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword2" id="" value="D">
+            <label class="form-check-label"  >&nbspD. แอนน์</label>
+          </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">3.คำถาม :	ใครชอบว่ายน้ำและวิ่งแข่ง						
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword3" id="" value="A">
+            <label class="form-check-label"  >&nbspA. นีน่า</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword3" id="" value="B">
+            <label class="form-check-label"  >&nbspB. โจโจ้</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword3" id="" value="C">
+            <label class="form-check-label"  >&nbspC. แซมมี่</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword3" id="" value="D">
+            <label class="form-check-label"  >&nbspD. แอนน์</label>
+          </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">4.คุณอนันต์และคุณสนั่นมีวันหยุดนานกว่าคุณกนก คุณพนามีวันหยุดสั้นกว่าคุณกนก							
+          ขณะที่คุณปรีดามีวันหยุดยาวกว่าคุณกนก<br>
+          คำถาม :	ใครมีวันหยุดสั้นที่สุด	
+					       
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword4" id="" value="A">
+            <label class="form-check-label"  >&nbspA. อนันต์</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword4" id="" value="B">
+            <label class="form-check-label"  >&nbspB. สนั่น</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword4" id="" value="C">
+            <label class="form-check-label"  >&nbspC. กนก</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword4" id="" value="D">
+            <label class="form-check-label"  >&nbspD. พนา</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword4" id="" value="E">
+            <label class="form-check-label"  >&nbspE. ปรีดา</label>
+          </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">5.โทนี่  โรเบิร์ต และเฟียตทุกคนใช้วันหยุดท่องทะเล ขณะที่แซม โจ และทิมไปปีนเขา							
+          เฟียต แซม และโจเดินทางด้วยเรือ โจ โรเบิร์ต และทิมไม่สนุกในวันหยุดเลย<br>
+          คำถาม : 	ใครไปท่องทะเลและไม่สนุกในวันหยุด				
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword5" id="" value="A">
+            <label class="form-check-label"  >&nbspA. โทนี่</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword5" id="" value="B">
+            <label class="form-check-label"  >&nbspB. โรเบิร์ต</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword5" id="" value="C">
+            <label class="form-check-label"  >&nbspC. เฟียต</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword5" id="" value="D">
+            <label class="form-check-label"  >&nbspD. แซม</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword5" id="" value="E">
+            <label class="form-check-label"  >&nbspE. โจ</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword5" id="" value="F">
+            <label class="form-check-label"  >&nbspF. ทิม</label>
+          </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">6.คำถาม :	ใครไม่ได้เดินทางโดยเรือและได้ไปปีนเขา				
+			
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword6" id="" value="A">
+            <label class="form-check-label"  >&nbspA. โทนี่</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword6" id="" value="B">
+            <label class="form-check-label"  >&nbspB. โรเบิร์ต</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword6" id="" value="C">
+            <label class="form-check-label"  >&nbspC. เฟียต</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword6" id="" value="D">
+            <label class="form-check-label"  >&nbspD. แซม</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword6" id="" value="E">
+            <label class="form-check-label"  >&nbspE. โจ</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword6" id="" value="F">
+            <label class="form-check-label"  >&nbspF. ทิม</label>
+          </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">7.ขณะที่แวะร้านบนเส้นทางไปสวนสัตว์ เชอรี่และหมิงเป็นเพียงเด็กสองคนที่ไม่ได้ซื้อ							
+          ช็อกโกแลต สี่คนในจำนวนเด็กห้าคน รวมทั้งริกะซื้อป๊อปคอร์น ขณะที่แซลลี เชอรี่							
+          และแสนดีไม่เหมือนเด็กคนอื่นเพราะไม่ได้ซื้อลูกอม ที่จริงแล้วเชอรี่ซื้อแค่หมากฝรั่ง							
+          รสผลไม้ เพราะเธอไม่ชอบของหวานชนิดอื่น<br>
+          คำถาม :	ใครมีลูกอมและป๊อปคอร์น		
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword7" id="" value="A">
+            <label class="form-check-label"  >&nbspA. แซลลี่</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword7" id="" value="B">
+            <label class="form-check-label"  >&nbspB. เชอรี่</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword7" id="" value="C">
+            <label class="form-check-label"  >&nbspC. ริกะ</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword7" id="" value="D">
+            <label class="form-check-label"  >&nbspD. หมิง</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword7" id="" value="E">
+            <label class="form-check-label"  >&nbspE. แสนดี</label>
+          </div>
+          
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">8.คำถาม : 	ใครมีของหวานสามชนิด				
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword8" id="" value="A">
+            <label class="form-check-label"  >&nbspA. แซลลี่</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword8" id="" value="B">
+            <label class="form-check-label"  >&nbspB. เชอรี่</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword8" id="" value="C">
+            <label class="form-check-label"  >&nbspC. ริกะ</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword8" id="" value="D">
+            <label class="form-check-label"  >&nbspD. หมิง</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword8" id="" value="E">
+            <label class="form-check-label"  >&nbspE. แสนดี</label>
+          </div>
+          
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">9.คำถาม :	ใครคือสองคนที่มีจำนวนของหวานเท่ากัน และเป็นของหวานชนิดเดียวกัน						
+				
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword9" id="" value="A">
+            <label class="form-check-label"  >&nbspA. แซลลี่และริกะ</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword9" id="" value="B">
+            <label class="form-check-label"  >&nbspB. แซลลี่และหมิง</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword9" id="" value="C">
+            <label class="form-check-label"  >&nbspC. ริกะและหมิง</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword9" id="" value="D">
+            <label class="form-check-label"  >&nbspC. หมิงและแสนดี</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword9" id="" value="E">
+            <label class="form-check-label"  >&nbspE. แสนดีและแซลลี่</label>
+          </div>
+          
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">10.คำถาม :	รวมทั้งหมดแล้วมีของหวานกี่ชิ้นที่เด็กกลุ่มนี้ซื้อไป										
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword10" id="" value="A">
+            <label class="form-check-label"  >&nbspA. 7</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword10" id="" value="b" >
+            <label class="form-check-label"  >&nbspB. 8</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword10" id="" value="C" >
+            <label class="form-check-label"  >&nbspC. 9</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword10" id="" value="D" >
+            <label class="form-check-label"  >&nbspD. 10</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword10" id="" value="E" >
+            <label class="form-check-label"  >&nbspE. 11</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testword10" id="" value="F" >
+            <label class="form-check-label"  >&nbspF. 12</label>
+          </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <h4>แบบทดสอบที่ 5 : แบบทดสอบเรื่องการคำนวณตัวเลข</h4>
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">แบบทดสอบเรื่องการคำนวณตัวเลข</div>
+        <strong><u>ตัวอย่าง</u></strong> <img src="/img/math_example.gif"  alt=""> เท่ากับอะไร ? <img src="/img/math_example2.gif" alt="" ><br>
+        <span><i>คำอธิบาย :  ครึ่งส่วนสามครั้งทำให้เกิดหนึ่งกับอีกครึ่งส่วนซึ่งก็เท่ากับครึ่งหนึ่งของสาม				</i>			
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">1. 10% ของ 10 ปอนด์ คือเลขอะไร ?										
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath1" id="" value="4">
+          <label class="form-check-label"  >&nbspA.  £4</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath1" id="" value="8">
+          <label class="form-check-label"  >&nbspB. £8</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath1" id="" value="6">
+          <label class="form-check-label"  >&nbspC. £6
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath1" id="" value="9">
+          <label class="form-check-label"  >&nbspD. £9
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">2. 1.6 - 0.3 เท่ากับเท่าใด ?										
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath2" id="" value="1.003">
+          <label class="form-check-label"  >&nbspA.  1.003</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath2" id="" value="1.03">
+          <label class="form-check-label"  >&nbspB. 1.03</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath2" id="" value="1.3">
+          <label class="form-check-label"  >&nbspC. 1.3
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath2" id="" value="0.9">
+          <label class="form-check-label"  >&nbspD. 0.9
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">3. 1/3 x 1/3 เท่ากับเท่าใด ?										
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath3" id="" value="2.6">
+          <label class="form-check-label"  >&nbspA.  2.6</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath3" id="" value="1/9">
+          <label class="form-check-label"  >&nbspB. 1/9</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath3" id="" value="1/3">
+          <label class="form-check-label"  >&nbspC. 1/3
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath3" id="" value="2.60">
+          <label class="form-check-label"  >&nbspD. 2.60
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">4. <img src="/img/math4.gif" alt=""> เท่ากับเท่าใด ?										
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath4" id="" value="8">
+          <label class="form-check-label"  >&nbspA.  8</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath4" id="" value="6">
+          <label class="form-check-label"  >&nbspB. 6</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath4" id="" value="0.6">
+          <label class="form-check-label"  >&nbspC. 0.6
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath4" id="" value="0.9">
+          <label class="form-check-label"  >&nbspD. 0.9
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">5. 32/50 หากเป็นเปอร์เซ็นต์จะเท่ากับเท่าใด ?										
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath5" id="" value="64">
+          <label class="form-check-label"  >&nbspA.  64%</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath5" id="" value="34">
+          <label class="form-check-label"  >&nbspB. 34%</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath5" id="" value="47">
+          <label class="form-check-label"  >&nbspC. 47%
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath5" id="" value="18">
+          <label class="form-check-label"  >&nbspD. 18%
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">6. <img src="/img/math6.gif" alt=""> ของ 200 บาท เท่ากับเท่าใด ?										
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath6" id="" value="32">
+          <label class="form-check-label"  >&nbspA.  ฿32</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath6" id="" value="68">
+          <label class="form-check-label"  >&nbspB. ฿68</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath6" id="" value="45">
+          <label class="form-check-label"  >&nbspC. ฿45
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath6" id="" value="9">
+          <label class="form-check-label"  >&nbspD. ฿9
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">7. 6% ของ 40 ปอนด์ บวกกับ <img src="/img/math7.gif" alt="">ของ 20 ปอนด์ผลลัพย์คือตัวเลขใด ?										
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath7" id="" value="4.65">
+          <label class="form-check-label"  >&nbspA.  £4.65</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath7" id="" value="35.00">
+          <label class="form-check-label"  >&nbspB. £35.00</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath7" id="" value="6.35">
+          <label class="form-check-label"  >&nbspC. £6.35
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath7" id="" value="4.90">
+          <label class="form-check-label"  >&nbspD. £4.90
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">8. 0.09 หารด้วย 0.3 เท่ากับเท่าใด ?										
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath8" id="" value="0.7">
+          <label class="form-check-label"  >&nbspA.  0.7</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath8" id="" value="0.3">
+          <label class="form-check-label"  >&nbspB. 0.3</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath8" id="" value="0.02">
+          <label class="form-check-label"  >&nbspC. 0.02
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath8" id="" value="0.07">
+          <label class="form-check-label"  >&nbspD. 0.07
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">9.  ฉันจะได้รับเงินกี่ดอลลาร์สำหรับเงิน 10 ปอนด์ หากอัตราแลกเปลี่ยนคือ 1.45 ดอลลาร์ต่อ 1 ปอนด์ ?										
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath9" id="" value="18.20">
+          <label class="form-check-label"  >&nbspA.  $18.20</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath9" id="" value="13.00">
+          <label class="form-check-label"  >&nbspB. $13.00</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath9" id="" value="16.90">
+          <label class="form-check-label"  >&nbspC. $16.90
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath9" id="" value="14.50">
+          <label class="form-check-label"  >&nbspD. $14.50
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">10. ถ้าของชิ้นหนึ่งเมื่อหักส่วนลด 60% จากราคาเดิม แล้วมีมูลค่า 126 ปอนด์ ดังนั้นราคาเดิมจะเป็นเท่าใด ?										
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath10" id="" value="210">
+          <label class="form-check-label"  >&nbspA.  £210</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath10" id="" value="145">
+          <label class="form-check-label"  >&nbspB. £145</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath10" id="" value="80">
+          <label class="form-check-label"  >&nbspC. £80
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="testmath10" id="" value="225">
+          <label class="form-check-label"  >&nbspD. £225
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <h4>แบบทดสอบที่ 6 : แบบทดสอบภาษาอังกฤษทั่วไป</h4>
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">1. I_____ a pen and my sister _____ 10 pens										
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng1" id="" value="A">
+            <label class="form-check-label"  >&nbspA. am/is</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng1" id="" value="B">
+            <label class="form-check-label"  >&nbspB. have/ is</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng1" id="" value="C">
+            <label class="form-check-label"  >&nbspC. have/ has
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng1" id="" value="D">
+            <label class="form-check-label"  >&nbspD. has/ have
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">2. Her sisters _____ beatiful.										
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng2" id="" value="A">
+            <label class="form-check-label"  >&nbspA. is</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng2" id="" value="B">
+            <label class="form-check-label"  >&nbspB. was</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng2" id="" value="C">
+            <label class="form-check-label"  >&nbspC. are
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng2" id="" value="D">
+            <label class="form-check-label"  >&nbspD. hasn't
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">3. Look! ________ a lot of people in the yard!														
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng3" id="" value="A">
+            <label class="form-check-label"  >&nbspA. They are</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng3" id="" value="B">
+            <label class="form-check-label"  >&nbspB. They is</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng3" id="" value="C">
+            <label class="form-check-label"  >&nbspC. There is
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng3" id="" value="D">
+            <label class="form-check-label"  >&nbspD. There are
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">4. Situation: Lita sits next to you and she is bleeding.<br>
+          Question: What would you do for Lita ?
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng4" id="" value="A">
+            <label class="form-check-label"  >&nbspA. Make her a cup of coffee</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng4" id="" value="B">
+            <label class="form-check-label"  >&nbspB. Give her some tissue paper</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng4" id="" value="C">
+            <label class="form-check-label"  >&nbspC. Send her an A4 paper
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng4" id="" value="D">
+            <label class="form-check-label"  >&nbspD. Take her to the president
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">5. He is such a _____  guy. He only ever talks about himself.						
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng5" id="" value="A">
+            <label class="form-check-label"  >&nbspA. bored</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng5" id="" value="B">
+            <label class="form-check-label"  >&nbspB. boiled</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng5" id="" value="C">
+            <label class="form-check-label"  >&nbspC. boring
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng5" id="" value="D">
+            <label class="form-check-label"  >&nbspD. boilling
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">6. I’m very _____ in computer science and technology.					
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng6" id="" value="A">
+            <label class="form-check-label"  >&nbspA. bored</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng6" id="" value="B">
+            <label class="form-check-label"  >&nbspB. boiled</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng6" id="" value="C">
+            <label class="form-check-label"  >&nbspC. boring
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng6" id="" value="D">
+            <label class="form-check-label"  >&nbspD. boilling
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">7. Supa is lazy and always go to work late. She is the _____ employee in TFU.								
+						
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng7" id="" value="A">
+            <label class="form-check-label"  >&nbspA. worst</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng7" id="" value="B">
+            <label class="form-check-label"  >&nbspB. excellent
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng7" id="" value="C">
+            <label class="form-check-label"  >&nbspC. patient
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng7" id="" value="D">
+            <label class="form-check-label"  >&nbspD. punctual
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">8. Research <u><strong>indicates</strong></u> that over 81% of teachers are dissatisfied with their salaries and want more money.<br>
+          <i style="font-size:14px">Choose the correct word that has the closest meaning to the underlined word.</i>
+										
+						
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng8" id="" value="A">
+            <label class="form-check-label"  >&nbspA. clears</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng8" id="" value="B">
+            <label class="form-check-label"  >&nbspB. represents</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng8" id="" value="C">
+            <label class="form-check-label"  >&nbspC. prevents
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng8" id="" value="D">
+            <label class="form-check-label"  >&nbspD. shows
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">Look at this pictograph and answer the question number 9-11.							
+        </div>
+        <img src="/img/image075.png" style="height:250px" alt="" class="img-fluid">
+        <img src="/img/image074.png" style="height:40px" alt=""> = $5
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">9. How much does the salary Ms. Ladda will receive? 
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng9" id="" value="A">
+            <label class="form-check-label"  >&nbspA. $7</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng9" id="" value="B">
+            <label class="form-check-label"  >&nbspB. $35</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng9" id="" value="C">
+            <label class="form-check-label"  >&nbspC. $12
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng9" id="" value="D">
+            <label class="form-check-label"  >&nbspD. $37
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">10. How much Ms. Ladda Salary left if Ms. Ladda lend Mr. Kanok 12$?						
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng10" id="" value="A">
+            <label class="form-check-label"  >&nbspA. $80</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng10" id="" value="B">
+            <label class="form-check-label"  >&nbspB. $35</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng10" id="" value="C">
+            <label class="form-check-label"  >&nbspC. $23
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng10" id="" value="D">
+            <label class="form-check-label"  >&nbspD. $32
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">11. How much Ms. Ladda salary left if Ms. Ladda lend Mr. Kanok and Mr Ming 5$ each?								
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng11" id="" value="A">
+            <label class="form-check-label"  >&nbspA. $35</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng11" id="" value="B">
+            <label class="form-check-label"  >&nbspB. $25</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng11" id="" value="C">
+            <label class="form-check-label"  >&nbspC. $30
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng11" id="" value="D">
+            <label class="form-check-label"  >&nbspD. $20
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title"><i>Read the passage below and answer the question number 12. And 13.</i>								
+        </div>
+        <p>      People released a video. It shows a small Japanese robot and a man at a space station. The robot 										
+          has been at the space station since August 10th. It has been conducting experiments there. It is										
+          controlled remotely from Earth. The man arrived at the space station on November 7th. When 										
+          they met, the robot said he was already used to it. With Christmas approaching,										
+          two are also looking forward to a visit from Santa. The robot wishes for a toy rocket.										
+          </p>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">12. How does the robot work?								
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng12" id="" value="A">
+            <label class="form-check-label"  >&nbspA.  It works automatically	
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng12" id="" value="B">
+            <label class="form-check-label"  >&nbspB.  It was remote by officer		
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng12" id="" value="C">
+            <label class="form-check-label"  >&nbspC.  It doesn’t work
+
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng12" id="" value="D">
+            <label class="form-check-label"  >&nbspD.  It wishes for a toy rocket
+
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">13. When the robot sent off to outer space?								
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng13" id="" value="A">
+            <label class="form-check-label"  >&nbspA. August 10th</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng13" id="" value="B">
+            <label class="form-check-label"  >&nbspB. November 7th</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng13" id="" value="C">
+            <label class="form-check-label"  >&nbspC. December 25th
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng13" id="" value="D">
+            <label class="form-check-label"  >&nbspD. Every Christmas            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">14. I normally phone my customer __ 9 o’clock every morning.														
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng14" id="" value="A">
+            <label class="form-check-label"  >&nbspA. in</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng14" id="" value="B">
+            <label class="form-check-label"  >&nbspB. on</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng14" id="" value="C">
+            <label class="form-check-label"  >&nbspC. at
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng14" id="" value="D">
+            <label class="form-check-label"  >&nbspD. by
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">15.  _____ we have to think about our budget and ____ about how much time we have.								
+														
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng15" id="" value="A">
+            <label class="form-check-label"  >&nbspA. However,whereas</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng15" id="" value="B">
+            <label class="form-check-label"  >&nbspB. Firstly, even so</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng15" id="" value="C">
+            <label class="form-check-label"  >&nbspC. Firstly, then
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng15" id="" value="D">
+            <label class="form-check-label"  >&nbspD. Because of this, such as
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">16. Camels live in the desert, _____ dolphins live in the sea.						
+														
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng16" id="" value="A">
+            <label class="form-check-label"  >&nbspA. such as</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng16" id="" value="B">
+            <label class="form-check-label"  >&nbspB. even so</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng16" id="" value="C">
+            <label class="form-check-label"  >&nbspC. then
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng16" id="" value="D">
+            <label class="form-check-label"  >&nbspD. whereas
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">17. I _____ to the head office last week.				
+														
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng17" id="" value="A">
+            <label class="form-check-label"  >&nbspA. go</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng17" id="" value="B">
+            <label class="form-check-label"  >&nbspB. went</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng17" id="" value="C">
+            <label class="form-check-label"  >&nbspC. gone
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng17" id="" value="D">
+            <label class="form-check-label"  >&nbspD. going
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">18. Mr. A: Are you Leo or Virgo?<br>
+          Ms. B: ____, I’m Pisces.		
+
+
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng18" id="" value="A">
+            <label class="form-check-label"  >&nbspA. Both</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng18" id="" value="B">
+            <label class="form-check-label"  >&nbspB. Either</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng18" id="" value="C">
+            <label class="form-check-label"  >&nbspC. Neither
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng18" id="" value="D">
+            <label class="form-check-label"  >&nbspD. Of course
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">19. When I got to the room, the meeting _____ already _____.						
+
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng19" id="" value="A">
+            <label class="form-check-label"  >&nbspA. have, start</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng19" id="" value="B">
+            <label class="form-check-label"  >&nbspB. had, started</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng19" id="" value="C">
+            <label class="form-check-label"  >&nbspC. was, start
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng19" id="" value="D">
+            <label class="form-check-label"  >&nbspD. is, started
+            </label>
+          </div>
+        
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">20. She _____ me, she has been to Japan.				
+														
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng20" id="" value="A">
+            <label class="form-check-label"  >&nbspA. tell</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng20" id="" value="B">
+            <label class="form-check-label"  >&nbspB. telled</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng20" id="" value="C">
+            <label class="form-check-label"  >&nbspC. told
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="testeng20" id="" value="D">
+            <label class="form-check-label"  >&nbspD. telling
+            </label>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="row">
+  <div class="col-md-12">
+    <h4>แบบทดสอบที่ 7 : แบบทดสอบบุคลิกภาพ</h4>
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspดูข้อความแต่ละข้อความตามลำดับ คุณต้องประเมินตัวคุณเองตามข้อความแต่ละข้อโดยให้คะแนนตั้งแต่ 1 ถึง 10 หากคุณให้<br>																
+          คะแนนตัวคุณเอง 1 คะแนน นั่นหมายถึงว่าข้อความนั้นไม่เป็นจริงสำหรับคุณแม้แต่น้อย คะแนน 10 คะแนนหมายถึงข้อความนั้น<br>																
+          อธิบายความเป็นตัวคุณได้อย่างสมบูรณ์ คะแนน 5 หรือ 6 หมายถึงว่า ข้อความนั้นบางครั้งก็เป็นจริงสำหรับคุณและบางครั้งก็ไม่จริง<br> 																
+          ดังนั้น ยิ่งคุณให้คะแนนตัวคุณมากเท่าใดคุณก็ยิ่งคิดว่าข้อความนั้นอธิบายความเป็นตัวคุณมากเท่านั้น ไม่มีคำตอบที่ถูกหรือผิดใน<br>																
+          แบบทดสอบนี้ คำตอบของคุณเป็นการให้ภาพว่าปกติแล้วคุณเป็นคนอย่างไร และโดยทั่วไปแล้วคุณมีวิธีคิดและรู้สึกอย่างไร																
+                
+        </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">1. ฉันชอบอยู่ตามลำพังเพื่อทำงานของฉัน 
+        <input type="text" name="personality1" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">2. ฉันชอบทำให้ตัวเองเป็นที่รู้จักของทุกคน					
+ 
+        <input type="text" name="personality2" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">3. ฉันต้องมั่นใจว่าฉันมีข้อเท็จจริงที่ถูกต้องเสมอ					
+ 
+        <input type="text" name="personality3" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">4. บ่อยครั้งที่ฉันพูดหรือทำโดยไม่คิดให้ดีก่อน					
+
+        <input type="text" name="personality4" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">5. ฉันคิดอะไรออกมาได้ไม่ยาก			
+
+        <input type="text" name="" id="personality5" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">6. ฉันใช้เวลาอย่างเต็มที่เพื่อตระเตรียมสิ่งที่อาจจะเป็นปัญหา							
+ 
+        <input type="text" name="personality6" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">7. ไม่มีใครสามารถห้ามฉันพูด หากฉันมีอะไรที่อยากพูด						
+
+        <input type="text" name="personality7" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">8. ฉันชอบให้คนอื่นเป็นผู้นำมากที่สุด				
+
+        <input type="text" name="personality8" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">9. ฉันไม่ชอบทำอะไรที่แตกต่างจากเพื่อนมากเกินไป						
+
+        <input type="text" name="personality9" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">10. ความรู้สึกของคนอื่นมีผลต่อความรู้สึกของฉัน					
+
+        <input type="text" name="personality10" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">11. ฉันต้องมั่นใจว่าสิ่งที่ฉันทำต้องดีที่สุดเท่าที่จะดีได้						
+				
+
+        <input type="text" name="personality11" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">12. ฉันไวที่จะรับรู้ความทุกข์ยากของคนอื่น					
+			
+
+        <input type="text" name="personality12" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">13. หากเป็นไปได้ ฉันมักหลีกเลี่ยงการต้องรับมือกับความรู้สึกต่างๆ								
+					
+
+        <input type="text" name="personality13" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">14. ฉันไม่ตอบโต้อย่างรีบร้อน			
+					
+
+        <input type="text" name="personality14" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">15. ฉันมักทำงานได้ดีเยี่ยมเมื่อต้องทำงานร่วมกับคนอื่น						
+					
+
+        <input type="text" name="personality15" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">16. ฉันไม่ชอบออกไปข้างนอกเอามากๆ				
+				
+
+        <input type="text" name="personality16" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">17. การได้สนุกและเพลิดเพลินในยามว่างเป็นเรื่องสำคัญสำหรับฉัน								
+					
+
+        <input type="text" name="personality17" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">18. ฉันไม่สนใจความรู้สึกของคนอื่น				
+				
+
+        <input type="text" name="personality18" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">19. ฉันเป็นคนเบื่อง่าย		
+					
+
+        <input type="text" name="personality19" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">20. ฉันมีความอ่อนไหวน้อยกว่าคนอื่น				
+					
+
+        <input type="text" name="personality20" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">21. ต้องใช้ความพยายามอย่างมากที่จะลดทอนความเชื่อมั่นในตัวเองของฉัน									
+				
+
+        <input type="text" name="personality21" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">22. การได้ทำบางสิ่งบางอย่างที่แปลกใหม่และแตกต่างอยู่เสมอเป็นสิ่งที่ดึงดูดใจฉัน										
+					
+
+        <input type="text" name="personality22" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">23. กิจกรรมที่โปรดปรานของฉันคือการทำให้เพื่อนสนุกเพลิดเพลิน								
+					
+
+        <input type="text" name="personality23" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">24. ฉันสามารถควบคุมความรู้สึกหงุดหงิดรำคาญได้						
+					
+
+        <input type="text" name="personality24" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">25. ฉันพูดอย่างจริงใจเสมอ			
+				
+
+        <input type="text" name="personality25" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">26. ฉันนอนไม่หลับเพราะยังหมกมุ่นกับเรื่องที่ผ่านมา						
+				
+
+        <input type="text" name="personality26" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">27. ฉันไม่ต้องคอยหาคนมาเป็นเพื่อน				
+					
+
+        <input type="text" name="personality27" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">28. ฉันเป็นคนพอใจในสิ่งที่มีอยู่			
+					
+
+        <input type="text" name="personality28" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">29. เป็นเรื่องง่ายที่ฉันจะตัดสินใจด้วยตัวเอง					
+					
+
+        <input type="text" name="personality29" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">30. ฉันไม่ชอบชักจูงคนให้เปลี่ยนใจ				
+					
+
+        <input type="text" name="personality30" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">31. ฉันไม่รู้สึกว่าเป็นเรื่องยากที่จะอดทนต่อเรื่องใดเรื่องหนึ่ง							
+        <input type="text" name="personality31" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">32. ฉันสามารถเปลี่ยนใจได้อย่างกะทันหัน				
+			
+        <input type="text" name="personality32" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">33. ฉันทำให้คนอื่นมีส่วนเกี่ยวข้องเมื่อพวกเขามารวมตัวกัน						
+		
+        <input type="text" name="personality33" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">34. ฉันไม่เห็นว่าจะเป็นอันตรายอะไรที่จะบอกความลับแก่เพื่อน							
+		
+        <input type="text" name="personality34" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">35. ผู้คนมักจะมองว่าฉันเป็นคนสายตาหลักแหลม					
+			
+        <input type="text" name="personality35" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">36. ปกติแล้วฉันมักจะเห็นด้วยกับบางสิ่งบางอย่าง เมื่อมีบางคนรู้สึกอย่างแรงกล้า									
+			
+        <input type="text" name="personality36" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">37. ฉันมักจะชนะการโต้แย้งเสมอ			
+			
+        <input type="text" name="personality37" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">38. การมีเพื่อนฝูงไม่ใช่เรื่องสลักสำคัญอะไรนักสำหรับฉัน						
+			
+        <input type="text" name="personality38" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">39. ฉันไม่ชอบให้ใครมาล่วงล้ำอาณาเขตของฉัน					
+			
+        <input type="text" name="personality39" id="" style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center"></div>
+        <div class="card-title">40. ฉันชอบให้คนโทรศัพท์มาหาฉันเวลาใดก็ได้					
+			
+        <input type="text" name="personality40" id=""  style="outline:0;border-width: 0 0 2px;border-color:green" size="2" maxlength="2" class="text-center" ></div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-12 text-center">
+        <input type="submit" value="ส่งแบบทดสอบ" class="btn btn-primary btn-lg" ref="submitButton" @click="endCount()"  >
+    </div>
+</div>
+</form>
+</template>
+</transition>
+</div>
+
+<%- include('partials/footer.ejs') %>
